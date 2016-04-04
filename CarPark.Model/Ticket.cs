@@ -9,13 +9,19 @@ namespace CarPark.Model
     public class Ticket
     {
         public DateTime DateIn { get; set; }
-        public DateTime DateOut { get; set; }
-        public decimal ParkingFee
+        public DateTime? DateOut { get; set; }
+        public decimal? ParkingFee
         {
             get
             {
+                if (DateOut == null)
+                    return null;
+
+                if (DateIn > DateOut)
+                    throw new Exception("Invalid date");
+
                 decimal fee = 0m;
-                TimeSpan diff = DateOut - DateIn;
+                TimeSpan diff = DateOut.Value - DateIn;
                 if (diff.TotalMinutes <= 15)
                     fee = 0m;
                 else 
@@ -30,11 +36,8 @@ namespace CarPark.Model
                             minute = minute - 60;
                         }
                     }
-                  
-                    
                 }
                 
-
                 return fee;
             }
           
