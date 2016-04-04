@@ -3,5 +3,7 @@ bin/
 obj/
 *.suo
 Result.html
+*.mdf
+*.ldf
 
 
