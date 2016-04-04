@@ -1,4 +1,6 @@
 packages/
 bin/
 obj/
+*.suo
 Result.html
+
